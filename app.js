@@ -19,13 +19,15 @@ const { isLoggedIn } = require('./middleware')
 const dbUrl = process.env.DB_URL
 
 // mongodb://localhost:27017/yelp-camp'
-mongoose.connect('mongodb+srv://anubhavregmi2:Onepiece10@cluster0.gt1cs5h.mongodb.net/'), {
+mongoose.connect('mongodb+srv://anubhavregmi2:Onepiece10@cluster0.gt1cs5h.mongodb.net/', {
+    serverSelectionTimeoutMS: 30000, // Adjust the timeout as needed
+    socketTimeoutMS: 45000, 
     useNewUrlParser: true,
     useCreateIndex: true,
     useUnifiedTopology: true,
     useFindAndModify: false
 
-};
+});
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", () => {
